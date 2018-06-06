@@ -24,14 +24,14 @@ export class AppComponent {
       this.task.num = this.jobs.length;
       this.task.num++;
       this.jobs = JSON.parse(localStorage.getItem('jobs'));
-      this.task.color = 'rgb('+this.random()+')';
+      this.task.color = this.random();
       this.jobs.push(this.task);
       localStorage.setItem('jobs', JSON.stringify(this.jobs));
     
     }else{
       this.task.num++;
       this.jobs = JSON.parse(localStorage.getItem('jobs'));
-      this.task.color = 'rgb('+this.random()+')';
+      this.task.color = this.random();
       this.jobs.push(this.task);
       localStorage.setItem('jobs', JSON.stringify(this.jobs));
     }  
@@ -58,7 +58,7 @@ export class AppComponent {
       let x = Math.floor(Math.random() * (255 - 80) + 80);
        rgb.push(x);
      }
-    rgb.toString();
-    return rgb;
+    let color ='rgb('+rgb.toString()+')';
+    return color;
    }
 }
