@@ -6,7 +6,6 @@
 }
 .task{
    
-    background-color: #eee;
     list-style-type:none ;
     margin:0px 0px 15px 0px;
     padding: 15px;
@@ -16,6 +15,7 @@
     justify-content: center;
 }
 .button{
+    outline: none !important;
     margin: 10px;
     height: 80px;
     width: 200px;

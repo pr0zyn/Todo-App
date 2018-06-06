@@ -1,9 +1,8 @@
 <div class="jumbotron center">
-    <button (click)="add()" class="btn btn-light button">Add</button>
-    <button (click)="remove()" class="btn btn-light button">Remove</button>
+    <button (click)="add()" class="btn btn-success button">Add</button>
+    <button (click)="remove()" class="btn btn-danger button">Remove</button>
     <button (click)="clear()" class="btn btn-light button">Clear</button>
 </div>
-
     <ul *ngIf="jobs.length > 0"  class="task-list">
-        <li  class="task" *ngFor="let job of jobs">{{job.text}} {{job.num}}</li>        
+        <li [style.background-color]="job.color" class="task" *ngFor="let job of jobs">{{job.text}} {{job.num}}</li>        
     </ul>

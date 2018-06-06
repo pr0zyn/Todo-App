@@ -19,25 +19,25 @@ export class AppComponent {
         localStorage.setItem('jobs',JSON.stringify(this.jobs));
     }   
   }
-  add() { 
+  public add() { 
     if (this.jobs.length > 0) {
       this.task.num = this.jobs.length;
       this.task.num++;
       this.jobs = JSON.parse(localStorage.getItem('jobs'));
+      this.task.color = 'rgb('+this.random()+')';
       this.jobs.push(this.task);
-
       localStorage.setItem('jobs', JSON.stringify(this.jobs));
     
     }else{
       this.task.num++;
       this.jobs = JSON.parse(localStorage.getItem('jobs'));
+      this.task.color = 'rgb('+this.random()+')';
       this.jobs.push(this.task);
-
       localStorage.setItem('jobs', JSON.stringify(this.jobs));
     }  
   }
 
-  remove() {
+  public remove() {
     this.jobs.pop()
     if (this.task.num > 0) {
       this.task.num--
@@ -45,10 +45,20 @@ export class AppComponent {
     localStorage.setItem('jobs', JSON.stringify(this.jobs));
   }
 
-  clear() { 
+  public clear() { 
     localStorage.clear();
     this.jobs = [];
     localStorage.setItem('jobs', JSON.stringify(this.jobs));
     this.task.num = 0;
   }
+
+  public random() {
+    let rgb = [];
+    for (let i = 1; i <= 3;i++) {
+      let x = Math.floor(Math.random() * (255 - 80) + 80);
+       rgb.push(x);
+     }
+    rgb.toString();
+    return rgb;
+   }
 }
