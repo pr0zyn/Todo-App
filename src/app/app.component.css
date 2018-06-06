@@ -1,0 +1,22 @@
+.task-list{
+    padding: 0px;
+    font-size: 30px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+.task{
+   
+    background-color: #eee;
+    list-style-type:none ;
+    margin:0px 0px 15px 0px;
+    padding: 15px;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.button{
+    margin: 10px;
+    height: 80px;
+    width: 200px;
+}
