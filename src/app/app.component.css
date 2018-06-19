@@ -1,14 +1,25 @@
 .task-list{
-    padding: 0px 88px 30px 88px;
-    font-size: 30px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
 }
 .task{
+    text-align: left;
     height: 207px;
-    display: inline-block;
     width: 300px;
     border-radius: 6px;
     margin: 10px;
     padding: 15px;
+}
+@media only screen and (max-width: 646px) {
+    .task-list{
+        grid-template-columns: auto !important;
+    }
+}
+@media only screen and (max-width: 1170px) {
+    .task-list{
+        grid-template-columns: auto auto;
+    }
 }
 .center{
     display: flex;
@@ -24,8 +35,6 @@
     margin: auto;
     width: 60%;
 }
-/* Track */
-
 .title{
     font-size: 28px;
     display: flex;
