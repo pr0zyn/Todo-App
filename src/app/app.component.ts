@@ -1,64 +1,45 @@
-import { Component } from '@angular/core';
+import { TaskService } from './task.service';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Task } from './task';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  task;
-  jobs = [];
+export class AppComponent implements OnInit {
+    public todos;
+    public title: string;
+    public content: string;
+  constructor(private taskService: TaskService) {}
 
-  constructor(){ 
-    this.task =  new Task();  
-    this.task.text = "Task number";
-    this.task.num = 0;
-    this.jobs = JSON.parse(localStorage.getItem('jobs'));
-    if (this.jobs == null) {
-        this.jobs = [];
-        localStorage.setItem('jobs',JSON.stringify(this.jobs));
-    }   
-  }
-  public add() { 
-    if (this.jobs.length > 0) {
-      this.task.num = this.jobs.length;
-      this.task.num++;
-      this.jobs = JSON.parse(localStorage.getItem('jobs'));
-      this.task.color = this.random();
-      this.jobs.push(this.task);
-      localStorage.setItem('jobs', JSON.stringify(this.jobs));
-    
-    }else{
-      this.task.num++;
-      this.jobs = JSON.parse(localStorage.getItem('jobs'));
-      this.task.color = this.random();
-      this.jobs.push(this.task);
-      localStorage.setItem('jobs', JSON.stringify(this.jobs));
-    }  
-  }
+    ngOnInit() {
+        this.todos = this.taskService.getTodos();
+        this.title = "",
+        this.content = ""
+    }
 
-  public remove() {
-    this.jobs.pop()
-    if (this.task.num > 0) {
-      this.task.num--
-    }  
-    localStorage.setItem('jobs', JSON.stringify(this.jobs));
-  }
+    public onSubmit(form: NgForm) { 
+        this.todos.push(this.taskService.addTodo(this.title, this.content, this.randomColor()));
+        form.form.reset();
+    }
+  
+    public clear() { 
+        this.taskService.clear();
+        this.todos = [];
+    }
 
-  public clear() { 
-    localStorage.clear();
-    this.jobs = [];
-    localStorage.setItem('jobs', JSON.stringify(this.jobs));
-    this.task.num = 0;
-  }
+    public remove(id: number) { 
+      this.todos = this.taskService.remove(id);
+    }
 
-  public random() {
-    let rgb = [];
-    for (let i = 1; i <= 3;i++) {
-      let x = Math.floor(Math.random() * (255 - 80) + 80);
-       rgb.push(x);
-     }
-    let color ='rgb('+rgb.toString()+')';
-    return color;
+    public randomColor() {
+        let rgb = [];
+        for (let i = 1; i <= 3;i++) {
+        let x = Math.floor(Math.random() * (255 - 80) + 80);
+            rgb.push(x);
+        }
+        let color ='rgb('+rgb.toString()+')';
+        return color;
    }
 }

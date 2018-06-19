@@ -1,8 +1,27 @@
-<div class="jumbotron center">
-    <button (click)="add()" class="btn btn-success button">Add</button>
-    <button (click)="remove()" class="btn btn-danger button">Remove</button>
-    <button (click)="clear()" class="btn btn-light button">Clear</button>
+<div class="jumbotron">
+    <form class="form" #form="ngForm"  novalidate>
+        <div class="form-group">
+            <input type="text" required name="title"  [(ngModel)]="title" #Title="ngModel"  class="form-control" placeholder="Title">
+        </div>
+        <div *ngIf="Title.touched && !Title.valid" class="alert alert-danger">Title is required</div>
+        <div class="form-group">
+            <input type="text" required name="content" [(ngModel)]="content" #Content="ngModel" class="form-control" placeholder="Content">
+        </div>
+        <div *ngIf="Content.touched && !Content.valid" class="alert alert-danger">Content is required</div>
+        <div class="center">
+            <button (click)="onSubmit(form)" [disabled] = "form.invalid" class="btn btn-success button">Add</button>
+            <button (click)="clear()" class="btn btn-light button">Clear</button>
+        </div>
+    </form>
 </div>
-    <ul *ngIf="jobs.length > 0"  class="task-list">
-        <li [style.background-color]="job.color" class="task" *ngFor="let job of jobs">{{job.text}} {{job.num}}</li>        
-    </ul>
+<div *ngIf="todos.length > 0"  class="task-list">
+    <div [style.background-color]="todo.color" class="task" *ngFor="let todo of todos">
+        <div class="title">
+            <span> {{todo.title}}</span>
+                <button (click)="remove(todo.id)" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="text"> {{todo.content}}</div>
+    </div>        
+</div>
